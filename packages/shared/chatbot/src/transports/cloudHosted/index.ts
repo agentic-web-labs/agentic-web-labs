@@ -228,7 +228,7 @@ export class CloudHostedTransport implements ChatTransport<
             tools: this.formattedTools,
             providerOptions: this.providerOptions,
             abortSignal,
-            system: this.systemPrompt,
+            ...(this.systemPrompt?.trim() ? { system: this.systemPrompt } : {}),
             stopWhen: ({ steps }) => steps.length === 100,
             onError: (err) => {
               surfaceError(err.error);
